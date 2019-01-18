@@ -114,6 +114,7 @@ class LoginViewController: UIViewController {
             self.fetchFacebookUser()
         }
     }
+
     
     fileprivate func fetchFacebookUser() {
         let req = GraphRequest(graphPath: "me", parameters: ["fields": "email,first_name,last_name,gender,picture"], accessToken: AccessToken.current, httpMethod: GraphRequestHTTPMethod(rawValue: "GET")!)
@@ -131,32 +132,88 @@ class LoginViewController: UIViewController {
                     let pictureUrlFB = responseDictionary["picture"] as? [String:Any]
                     let photoData = pictureUrlFB!["data"] as? [String:Any]
                     let photoUrl = photoData!["url"] as? String
-                    let filename = UUID().uuidString
+                    
                     print(firstNameFB ?? "", lastNameFB ?? "", socialIdFB ?? "", genderFB ?? "", photoUrl ?? "")
-                    let uid = Auth.auth().currentUser?.uid ?? ""
-                    let name = "\(firstNameFB ?? "") \(lastNameFB ?? "")"
-                    let docData: [String: Any] =
-                        ["Full Name": name,
-                         "uid": uid,
-                         "School": "N/A",
-                         "Age": 1,
-                         "Bio": "",
-                         "minSeekingAge": 18,
-                         "maxSeekingAge": 50,
-                         "ImageUrl1": pictureUrlFB as Any]
+                   
+                    self.fullName = "\(firstNameFB ?? "") \(lastNameFB ?? "")"
+                    self.photoUrl = photoUrl
+                    
+//                    let docData: [String: Any] =
+//                        ["Full Name": name,
+//                         "uid": uid,
+//                         "School": "N/A",
+//                         "Age": 1,
+//                         "Bio": "",
+//                         "minSeekingAge": 18,
+//                         "maxSeekingAge": 50,
+//                         "ImageUrl1": photoUrl as Any]
                     //let userAge = ["Age": age]
-                    Firestore.firestore().collection("users").document(uid).setData(docData) { (err) in
-                        //self.bindableIsRegistering.value = false
-                        if let err = err {
-                            print("hahahaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",err)
-                            return
-                        }
-                        let messageController = MessageController()
-                        self.present(messageController, animated: true)
+//                    Firestore.firestore().collection("users").document(uid).setData(docData) { (err) in
+//                        //self.bindableIsRegistering.value = false
+//                        if let err = err {
+//                            print("hahahaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",err)
+//                            return
+//                        }
+//                        let profileController = ProfilePageViewController()
+//                        self.present(profileController, animated: true)
                     }
                 }
-            }
+            self.saveInfoToFirestore()
+            
         })
+    }
+    
+//    fileprivate func saveImageToFirebase(completion: @escaping (Error?) ->()) {
+//
+//        let filename = UUID().uuidString
+//        let ref = Storage.storage().reference(withPath: "/images/\(filename)")
+//        let imageData = self.photoData.jpegData(compressionQuality: 0.75) ?? Data()
+//        ref.putData(imageData, metadata: nil, completion: {(_, err) in
+//            if let err = err {
+//                completion(err)
+//                return //bail
+//            }
+//            print("finished Uploading image")
+//            ref.downloadURL(completion: { (url, err) in
+//                if let err = err {
+//                    completion(err)
+//                    return
+//                }
+//                self.bindableIsRegistering.value = false
+//                print("Download url of our image is:", url?.absoluteString ?? "")
+//
+//                let imageUrl = url?.absoluteString ?? ""
+//                self.saveInfoToFirestore(imageUrl: imageUrl, completion: completion)
+//            })
+//        })
+//    }
+
+    var fullName: String?
+    var school: String?
+    var age: Int?
+    var photoUrl: String?
+    
+    fileprivate func saveInfoToFirestore(){
+        let uid = Auth.auth().currentUser?.uid ?? ""
+        let docData: [String: Any] =
+            ["Full Name": fullName ?? "",
+             "uid": uid,
+             "School": school ?? "",
+             "Age": age ?? 18,
+             "Bio": "",
+             "minSeekingAge": 18,
+             "maxSeekingAge": 50,
+             "ImageUrl1": photoUrl!]
+        //let userAge = ["Age": age]
+        Firestore.firestore().collection("users").document(uid).setData(docData) { (err) in
+           
+            if let err = err {
+                print("there was an err",err)
+                return
+            }
+            let profileController = ProfilePageViewController()
+            self.present(profileController, animated: true)
+        }
     }
     
     fileprivate func showHUDWithError(error: Error) {
@@ -207,9 +264,7 @@ class LoginViewController: UIViewController {
         overallStackView.layoutMargins = .init(top: 0, left: 30, bottom: 80, right: 30)
         overallStackView.spacing = 10
         
-        
     }
-    
     
     let gradientLayer = CAGradientLayer()
     

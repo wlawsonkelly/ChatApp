@@ -102,6 +102,7 @@
 		2861209721F114AC000A7F91 /* MessagesIconCrusht.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MessagesIconCrusht.png; sourceTree = "<group>"; };
 		2861209921F114B3000A7F91 /* SettingsBetter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SettingsBetter.png; sourceTree = "<group>"; };
 		2861209B21F17165000A7F91 /* upload_image_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upload_image_icon.png; sourceTree = "<group>"; };
+		2861209D21F17D38000A7F91 /* ChatApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChatApp.entitlements; sourceTree = "<group>"; };
 		441D549E758F20ADDB4DB7CD /* Pods-ChatApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp.release.xcconfig"; sourceTree = "<group>"; };
 		57076B620E11CA40B0BD844D /* Pods-ChatAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatAppTests/Pods-ChatAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		706F5466A76394BA9D854C09 /* Pods-ChatApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -164,6 +165,7 @@
 		2861203221F0F30D000A7F91 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				2861209D21F17D38000A7F91 /* ChatApp.entitlements */,
 				2861203321F0F30D000A7F91 /* AppDelegate.swift */,
 				2861203521F0F30D000A7F91 /* ViewController.swift */,
 				2861203721F0F30D000A7F91 /* Main.storyboard */,
@@ -312,6 +314,11 @@
 				TargetAttributes = {
 					2861202F21F0F30D000A7F91 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					2861204321F0F310000A7F91 = {
 						CreatedOnToolsVersion = 10.1;
@@ -702,6 +709,7 @@
 			baseConfigurationReference = 706F5466A76394BA9D854C09 /* Pods-ChatApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ChatApp/ChatApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7L9BJYQ2H8;
 				INFOPLIST_FILE = ChatApp/Info.plist;
@@ -721,6 +729,7 @@
 			baseConfigurationReference = 441D549E758F20ADDB4DB7CD /* Pods-ChatApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ChatApp/ChatApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7L9BJYQ2H8;
 				INFOPLIST_FILE = ChatApp/Info.plist;
