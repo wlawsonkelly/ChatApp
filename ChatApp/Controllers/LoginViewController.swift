@@ -211,8 +211,9 @@ class LoginViewController: UIViewController {
                 print("there was an err",err)
                 return
             }
-            let profileController = ProfilePageViewController()
-            self.present(profileController, animated: true)
+            let messageController = MessageController()
+            let navcontroller = UINavigationController(rootViewController: messageController)
+            self.present(navcontroller, animated: true)
         }
     }
     

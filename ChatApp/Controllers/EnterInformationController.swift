@@ -119,13 +119,14 @@ class EnterInfoViewController: UIViewController {
     @objc fileprivate func handleRegister() {
         self.handleTapDismiss()
         print("Register our User in Firebase Auth")
-        let profileController = ProfilePageViewController()
+        let messageController = MessageController()
         registrationViewModel.performRegistration { [weak self] (err) in
             if let err = err {
                 self?.showHUDWithError(error: err)
                 return
             }
-            self?.present(profileController, animated: true)
+            let navController = UINavigationController(rootViewController: messageController)
+            self?.present(navController, animated: true)
         }
         
     }

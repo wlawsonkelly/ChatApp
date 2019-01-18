@@ -31,17 +31,44 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     }
 }
 
-class MessageController: UITableViewController  {
+class MessageController: UITableViewController, SettingsControllerDelegate, LoginControllerDelegate  {
  
+    func didFinishLoggingIn() {
+        observeMessages()
+    }
     
- 
+    func didSaveSettings() {
+        print("Notified of dismissal")
+        observeMessages()
+    }
+    
+    @objc func handleSettings() {
+        let settingsController = SettingsTableViewController()
+        settingsController.delegate = self
+        let navController = UINavigationController(rootViewController: settingsController)
+        present(navController, animated: true)
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("HomeController did appear")
+        // you want to kick the user out when they log out
+        if Auth.auth().currentUser == nil {
+            let loginController = LoginViewController()
+            loginController.delegate = self
+            let navController = UINavigationController(rootViewController: loginController)
+            present(navController, animated: true)
+        }
+    }
+    
     //ADD COLLECTION CALLED USER MESSAGE OR SOMETING TO DOCUMENT SO ONLY GET ONE MESSAGE
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let cellId = "cellId"
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(handleBack))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(handleSettings))
         
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "New", style: .plain, target: self, action:#selector(handleNewMessage))
@@ -65,6 +92,7 @@ class MessageController: UITableViewController  {
     var messagesDictionary = [String: Message]()
     
     func observeUserMessages() {
+        self.fetchUserAndSetupNavBarTitle()
         guard let uid = Auth.auth().currentUser?.uid else {return}
         
         Firestore.firestore().collection("messages").whereField("toId", isEqualTo: uid).getDocuments(completion: { (snapshot, err) in
@@ -77,7 +105,7 @@ class MessageController: UITableViewController  {
                 let userDictionary = documentSnapshot.data()
                 let message = Message(dictionary: userDictionary)
                 self.messages.append(message)
-                self.fetchUserAndSetupNavBarTitle()
+                
                 //this will crash because of background thread, so lets call this on dispatch_async main thread
                 let messageStuff = Message(dictionary: userDictionary)
                 

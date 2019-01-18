@@ -30,9 +30,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         db.settings = settings
         
         window = UIWindow()
-        window?.makeKeyAndVisible()
-        
-        window?.rootViewController = ProfilePageViewController()
+        var navigationController: UINavigationController?
+
+        if let window = window {
+            let mainVC = MessageController()
+            navigationController = UINavigationController(rootViewController: mainVC)
+            window.rootViewController = navigationController
+            window.makeKeyAndVisible()
+        }
         
         return true
     }
