@@ -33,9 +33,6 @@
 		2861208421F10096000A7F91 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2861208321F10096000A7F91 /* Bindable.swift */; };
 		2861208621F10236000A7F91 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2861208521F10236000A7F91 /* Logo.png */; };
 		2861209021F10D82000A7F91 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2861208F21F10D82000A7F91 /* GoogleService-Info.plist */; };
-		2861209221F112B4000A7F91 /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2861209121F112B4000A7F91 /* ProfilePageViewController.swift */; };
-		2861209421F11328000A7F91 /* ProfileTopStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2861209321F11328000A7F91 /* ProfileTopStackView.swift */; };
-		2861209621F11371000A7F91 /* ProfPageMiddleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2861209521F11371000A7F91 /* ProfPageMiddleView.swift */; };
 		2861209821F114AC000A7F91 /* MessagesIconCrusht.png in Resources */ = {isa = PBXBuildFile; fileRef = 2861209721F114AC000A7F91 /* MessagesIconCrusht.png */; };
 		2861209A21F114B4000A7F91 /* SettingsBetter.png in Resources */ = {isa = PBXBuildFile; fileRef = 2861209921F114B3000A7F91 /* SettingsBetter.png */; };
 		2861209C21F17165000A7F91 /* upload_image_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2861209B21F17165000A7F91 /* upload_image_icon.png */; };
@@ -96,9 +93,6 @@
 		2861208321F10096000A7F91 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		2861208521F10236000A7F91 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
 		2861208F21F10D82000A7F91 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		2861209121F112B4000A7F91 /* ProfilePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageViewController.swift; sourceTree = "<group>"; };
-		2861209321F11328000A7F91 /* ProfileTopStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTopStackView.swift; sourceTree = "<group>"; };
-		2861209521F11371000A7F91 /* ProfPageMiddleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfPageMiddleView.swift; sourceTree = "<group>"; };
 		2861209721F114AC000A7F91 /* MessagesIconCrusht.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MessagesIconCrusht.png; sourceTree = "<group>"; };
 		2861209921F114B3000A7F91 /* SettingsBetter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SettingsBetter.png; sourceTree = "<group>"; };
 		2861209B21F17165000A7F91 /* upload_image_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upload_image_icon.png; sourceTree = "<group>"; };
@@ -209,8 +203,6 @@
 		2861209E21F188AF000A7F91 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2861209321F11328000A7F91 /* ProfileTopStackView.swift */,
-				2861209521F11371000A7F91 /* ProfPageMiddleView.swift */,
 				2861206D21F0F6B4000A7F91 /* SettingsCell.swift */,
 				2861206F21F0F6F4000A7F91 /* UserCell.swift */,
 				2861207121F0F714000A7F91 /* ChatMessageCell.swift */,
@@ -237,7 +229,6 @@
 				2861207521F0FB2E000A7F91 /* LoginViewController.swift */,
 				2861207921F0FE00000A7F91 /* LoginController.swift */,
 				2861207F21F0FEDE000A7F91 /* EnterInformationController.swift */,
-				2861209121F112B4000A7F91 /* ProfilePageViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -555,17 +546,14 @@
 				2861206221F0F373000A7F91 /* MessageController.swift in Sources */,
 				2861208221F0FF7E000A7F91 /* CustomTextField.swift in Sources */,
 				2861206C21F0F680000A7F91 /* Message.swift in Sources */,
-				2861209421F11328000A7F91 /* ProfileTopStackView.swift in Sources */,
 				2861207C21F0FE36000A7F91 /* LoginViewModel.swift in Sources */,
 				2861207221F0F714000A7F91 /* ChatMessageCell.swift in Sources */,
 				2861203421F0F30D000A7F91 /* AppDelegate.swift in Sources */,
 				2861207021F0F6F4000A7F91 /* UserCell.swift in Sources */,
-				2861209221F112B4000A7F91 /* ProfilePageViewController.swift in Sources */,
 				2861207621F0FB2E000A7F91 /* LoginViewController.swift in Sources */,
 				2861207E21F0FE73000A7F91 /* RegistrationViewModel.swift in Sources */,
 				2861206A21F0F675000A7F91 /* User.swift in Sources */,
 				2861207A21F0FE00000A7F91 /* LoginController.swift in Sources */,
-				2861209621F11371000A7F91 /* ProfPageMiddleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -53,7 +53,7 @@ class MessageController: UITableViewController, SettingsControllerDelegate, Logi
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print("HomeController did appear")
-        // you want to kick the user out when they log out
+
         if Auth.auth().currentUser == nil {
             let loginController = LoginViewController()
             loginController.delegate = self
@@ -62,7 +62,6 @@ class MessageController: UITableViewController, SettingsControllerDelegate, Logi
         }
     }
     
-    //ADD COLLECTION CALLED USER MESSAGE OR SOMETING TO DOCUMENT SO ONLY GET ONE MESSAGE
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,17 +75,9 @@ class MessageController: UITableViewController, SettingsControllerDelegate, Logi
         
         tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
         
-        //fetchUserAndSetupNavBarTitle()
-        
-        //observeUserMessages()
+ 
         observeMessages()
     }
-    
-    @objc fileprivate func handleBack() {
-       let profController = ProfilePageViewController()
-        present(profController, animated: true)
-    }
-    
    
     var messages = [Message]()
     var messagesDictionary = [String: Message]()
@@ -100,13 +91,12 @@ class MessageController: UITableViewController, SettingsControllerDelegate, Logi
                 print("HELLLLLLLLNO", err)
             }
             
-            //need to use where call and set it to from id
             snapshot?.documents.forEach({ (documentSnapshot) in
                 let userDictionary = documentSnapshot.data()
                 let message = Message(dictionary: userDictionary)
                 self.messages.append(message)
                 
-                //this will crash because of background thread, so lets call this on dispatch_async main thread
+
                 let messageStuff = Message(dictionary: userDictionary)
                 
                 if let chatPartnerId = messageStuff.chatPartnerId() {
@@ -123,7 +113,6 @@ class MessageController: UITableViewController, SettingsControllerDelegate, Logi
                 
                 self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
                 
-                
             })
             
         })
@@ -132,52 +121,25 @@ class MessageController: UITableViewController, SettingsControllerDelegate, Logi
     var timer: Timer?
     
     @objc func handleReloadTable() {
-        //this will crash because of background thread, so lets call this on dispatch_async main thread
+
         DispatchQueue.main.async(execute: {
             print("we reloaded the table")
             self.tableView.reloadData()
         })
     }
-    //                Database.database().reference().child("messages").child(messageId)
-    
-    //            messagesReference.observeSingleEvent(of: .value, with: { (snapshot) in
-    //
-    //                if let dictionary = snapshot.value as? [String: AnyObject] {
-    //                    let message = Message(dictionary: dictionary)
-    //
-    //                    if let toId = message.toId {
-    //                        self.messagesDictionary[toId] = message
-    //
-    //                        self.messages = Array(self.messagesDictionary.values)
-    //                        self.messages.sort(by: { (message1, message2) -> Bool in
-    //
-    //                            return message1.timestamp?.int32Value > message2.timestamp?.int32Value
-    //                        })
-    //                    }
-    //
-    //                    //this will crash because of background thread, so lets call this on dispatch_async main thread
-    //                    DispatchQueue.main.async(execute: {
-    //                        self.tableView.reloadData()
-    //                    })
-    //                }
-    //
-    //            }, withCancel: nil)
-    //
-    //        }, withCancel: nil)
-    
+ 
     
     func observeMessages() {
         self.fetchUserAndSetupNavBarTitle()
         guard let uid = Auth.auth().currentUser?.uid else {return}
         
-        //Figure out the problem here you genious
         
         Firestore.firestore().collection("messages").whereField("fromId", isEqualTo: uid).getDocuments(completion: { (snapshot, err) in
             if let err = err {
                 print("FAILLLLLLLLL", err)
             }
             
-            //need to use where call and set it to from id
+            
             snapshot?.documents.forEach({ (documentSnapshot) in
                 let userDictionary = documentSnapshot.data()
                 let message = Message(dictionary: userDictionary)
@@ -186,13 +148,12 @@ class MessageController: UITableViewController, SettingsControllerDelegate, Logi
                 self.messages.sort(by: { (message1, message2) -> Bool in
                     return message1.timestamp?.int32Value > message2.timestamp?.int32Value
                 })
-                //this will crash because of background thread, so lets call this on dispatch_async main thread
+                
                 DispatchQueue.main.async(execute: {
                     self.tableView.reloadData()
                     
                 })
                 
-                //changeHandler: nil)
             })
             
         })
@@ -207,18 +168,11 @@ class MessageController: UITableViewController, SettingsControllerDelegate, Logi
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! UserCell
-        //let user = users[indexPath.row]
+
         
         let message = messages[indexPath.row]
         cell.message = message
         
-        //        let message = messages[indexPath.row]
-        //        cell.textLabel?.text = message.toName
-        //        cell.detailTextLabel?.text = message.text
-        //
-        //        if let profileImageUrl = user.imageUrl1 {
-        //            cell.profileImageView.loadImageUsingCacheWithUrlString(profileImageUrl)
-        //        }
         
         return cell
     }
@@ -230,12 +184,7 @@ class MessageController: UITableViewController, SettingsControllerDelegate, Logi
             return
         }
         
-        //        let ref = Database.database().reference().child("users").child(chatPartnerId)
-        //
-        //        ref.observeSingleEvent(of: .value, with: { (snapshot) in
-        //            guard let dictionary = snapshot.value as? [String: AnyObject] else {
-        //                return
-        //            }
+
         Firestore.firestore().collection("users").document(chatPartnerId).getDocument(completion: { (snapshot, err) in
             guard let dictionary = snapshot?.data() as [String: AnyObject]? else {return}
             
@@ -256,11 +205,9 @@ class MessageController: UITableViewController, SettingsControllerDelegate, Logi
     
     func fetchUserAndSetupNavBarTitle() {
         guard let uid = Auth.auth().currentUser?.uid else {
-            //for some reason uid = nil
+
             return
         }
-        
-        //        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
         
         Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, err) in
             
@@ -275,7 +222,7 @@ class MessageController: UITableViewController, SettingsControllerDelegate, Logi
     }
     
     func setupNavBarWithUser(_ user: User) {
-        //observeUserMessages()
+        
         
         let titleView = UIView()
         titleView.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
@@ -296,8 +243,6 @@ class MessageController: UITableViewController, SettingsControllerDelegate, Logi
         
         containerView.addSubview(profileImageView)
         
-        //ios 9 constraint anchors
-        //need x,y,width,height anchors
         profileImageView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
         profileImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         profileImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
@@ -308,7 +253,8 @@ class MessageController: UITableViewController, SettingsControllerDelegate, Logi
         containerView.addSubview(nameLabel)
         nameLabel.text = user.name
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        //need x,y,width,height anchors
+
+        
         nameLabel.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 8).isActive = true
         nameLabel.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor).isActive = true
         nameLabel.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
@@ -319,7 +265,6 @@ class MessageController: UITableViewController, SettingsControllerDelegate, Logi
         
         self.navigationItem.titleView = titleView
         
-        //        titleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showChatController)))
     }
     
     func showChatControllerForUser(_ user: User) {

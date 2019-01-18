@@ -145,9 +145,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         collectionView?.register(ChatMessageCell.self, forCellWithReuseIdentifier: cellId)
         
         collectionView?.keyboardDismissMode = .interactive
-        
-//        observeMoreMessages()
-//        observeMessages()
+    
         
         setupKeyboardObservers()
         
@@ -213,19 +211,6 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         separatorLineView.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
         separatorLineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
-        let buttonStackView = UIStackView(arrangedSubviews: [stubHubButton, UIView(), UIView(), openTableButton])
-        buttonStackView.axis = .horizontal
-        containerView.addSubview(buttonStackView)
-        
-        buttonStackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        buttonStackView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
-        //buttonStackView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        buttonStackView.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
-        buttonStackView.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        buttonStackView.bottomAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        //        buttonStackView.isLayoutMarginsRelativeArrangement = true
-        //        buttonStackView.layoutMargins = .init(top: 0, left: 12, bottom: 0, right: 12)
         
         return containerView
         
@@ -247,10 +232,10 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         
         
         if let videoUrl = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaURL)] as? URL {
-            //we selected a video
+            // selected a video
             handleVideoSelectedForUrl(videoUrl)
         } else {
-            //we selected an image
+            // selected an image
             handleImageSelectedForInfo(info as [String : AnyObject])
         }
         
@@ -359,46 +344,6 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    //    fileprivate func sendMessageWithImageUrl(_ imageUrl: String) {
-    //        //take out to name
-    //        let toId = user!.uid!
-    //        let fromId = Auth.auth().currentUser!.uid
-    //        let toName = user!.name!
-    //        let timestamp = Int(Date().timeIntervalSince1970)
-    //        let values = ["imageUrl": imageUrl, "toId": toId, "toName": toName, "fromId": fromId, "timestamp": timestamp] as [String : Any]
-    //        Firestore.firestore().collection("messages").addDocument(data: values) { (err) in
-    //            if let err = err {
-    //                print("error sending message", err)
-    //                return
-    //            }
-    
-    
-    //        let ref = Database.database().reference().child("messages")
-    //        let childRef = ref.childByAutoId()
-    //        let toId = user!.id!
-    //        let fromId = Auth.auth().currentUser!.uid
-    //        let timestamp = Int(Date().timeIntervalSince1970)
-    //
-    //        let values = ["imageUrl": imageUrl, "toId": toId, "fromId": fromId, "timestamp": timestamp] as [String : Any]
-    //
-    //        childRef.updateChildValues(values) { (error, ref) in
-    //            if error != nil {
-    //                print(error!)
-    //                return
-    //            }
-    //
-    //            self.inputTextField.text = nil
-    //
-    //            guard let messageId = childRef.key else { return }
-    //
-    //            let userMessagesRef = Database.database().reference().child("user-messages").child(fromId).child(toId).child(messageId)
-    //            userMessagesRef.setValue(1)
-    //
-    //            let recipientUserMessagesRef = Database.database().reference().child("user-messages").child(toId).child(fromId).child(messageId)
-    //            recipientUserMessagesRef.setValue(1)
-    //        }
-    //    }
-    
     
     
     override var inputAccessoryView: UIView? {
@@ -542,33 +487,6 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         return NSString(string: text).boundingRect(with: size, options: options, attributes: convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.font): UIFont.systemFont(ofSize: 16)]), context: nil)
     }
     
-    lazy var openTableButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Open Table", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        button.backgroundColor = #colorLiteral(red: 0.9399780631, green: 0, blue: 0.2794805765, alpha: 1)
-        button.setTitleColor(.white, for: .normal)
-        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        button.widthAnchor.constraint(equalToConstant: 100) .isActive = true
-        button.layer.cornerRadius = 16
-        button.addTarget(self, action: #selector(handleOpenTableTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    lazy var stubHubButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("StubHub", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        button.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
-        button.setTitleColor(.orange, for: .normal)
-        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        button.widthAnchor.constraint(equalToConstant: 100) .isActive = true
-        button.layer.cornerRadius = 16
-        button.addTarget(self, action: #selector(handleStubTapped), for: .touchUpInside)
-        return button
-        
-        
-    }()
     
     var containerViewBottomAnchor: NSLayoutConstraint?
     
@@ -581,7 +499,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         
         view.addSubview(containerView)
         
-        //ios9 constraint anchors
+     
         //x,y,w,h
         containerView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -628,21 +546,6 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         separatorLineView.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
         separatorLineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
-        let buttonStackView = UIStackView(arrangedSubviews: [stubHubButton, UIView(), UIView(), openTableButton])
-        buttonStackView.axis = .horizontal
-        view.addSubview(buttonStackView)
-        
-        buttonStackView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        buttonStackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        buttonStackView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
-        //buttonStackView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        buttonStackView.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
-        buttonStackView.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        buttonStackView.bottomAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        buttonStackView.isLayoutMarginsRelativeArrangement = true
-        buttonStackView.layoutMargins = .init(top: 0, left: 12, bottom: 0, right: 12)
-        
         
     }
     
@@ -672,16 +575,6 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         
         //let ref = Firestore.firestore().collection("messages")
         
-        
-        
-        
-        Firestore.firestore().collection("messages").whereField("fromId", isEqualTo: fromId).whereField("toId", isEqualTo: toId).addSnapshotListener { (snapshot, err) in
-            if let err = err {
-                print("Error making individual convo", err)
-                return
-            }
-            
-        }
         
       print("about to send new message")
         //SOLUTION TO CURRENT ISSUE
@@ -713,6 +606,9 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
                         let document = documentSnapshot
                         if document.exists {
                             Firestore.firestore().collection("messages").document(documentSnapshot.documentID).collection("user-messages").addDocument(data: values)
+                            
+                            self.observeMoreMessages()
+                            self.observeMessages()
                         }
                         else{
                             print("DOC DOESN't exist yet")
