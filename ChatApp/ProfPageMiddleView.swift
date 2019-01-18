@@ -29,6 +29,7 @@ class ProfPageMiddleView: UIView {
         return button
     }()
     
+    
     let greetingLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 30, weight: .heavy)
@@ -42,7 +43,7 @@ class ProfPageMiddleView: UIView {
         heightAnchor.constraint(equalToConstant: 250).isActive = true
         backgroundColor = .clear
         
-        let stackView = UIStackView(arrangedSubviews: [selectPhotoButton, greetingLabel])
+        let stackView = UIStackView(arrangedSubviews: [UIView(), greetingLabel])
         addSubview(stackView)
         stackView.axis = .vertical
         stackView.spacing = 30

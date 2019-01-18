@@ -86,7 +86,7 @@ class ProfilePageViewController: UIViewController, SettingsControllerDelegate, L
         
         topStackView.homeButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
 
-        profPicView.selectPhotoButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
+//        profPicView.selectPhotoButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
      
         topStackView.messageButton.addTarget(self, action: #selector(handleMessages), for: .touchUpInside)
         setupLayout()

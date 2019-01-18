@@ -44,7 +44,7 @@ class MessageController: UITableViewController  {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(handleBack))
         
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "New Message", style: .plain, target: self, action:#selector(handleNewMessage))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "New", style: .plain, target: self, action:#selector(handleNewMessage))
         navigationItem.title = "Messages"
         
         tableView.register(UserCell.self, forCellReuseIdentifier: cellId)

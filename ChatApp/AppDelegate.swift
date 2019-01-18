@@ -34,7 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.rootViewController = ProfilePageViewController()
         
-        
         return true
     }
 

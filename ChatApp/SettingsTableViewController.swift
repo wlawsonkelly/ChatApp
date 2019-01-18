@@ -168,9 +168,9 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 {
-            return header
-        }
+//        if section == 0 {
+//            return header
+//        }
         let headerLabel = HeaderLabel()
         headerLabel.font = UIFont.boldSystemFont(ofSize: 18)
         switch section {
@@ -180,17 +180,17 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
             headerLabel.text = "School"
         case 3:
             headerLabel.text = "Age"
-        default:
+        case 4:
             headerLabel.text = "Bio"
+        default:
+            headerLabel.text = "Hello there, welcome to settings"
         }
         return headerLabel
         
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return 300
-        }
+     
         return 45
     }
     
