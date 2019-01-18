@@ -165,6 +165,10 @@
 		2861203221F0F30D000A7F91 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				286120A121F18938000A7F91 /* ViewModels */,
+				286120A021F188C9000A7F91 /* Controllers */,
+				2861209F21F188BF000A7F91 /* Models */,
+				2861209E21F188AF000A7F91 /* Views */,
 				2861209D21F17D38000A7F91 /* ChatApp.entitlements */,
 				2861203321F0F30D000A7F91 /* AppDelegate.swift */,
 				2861203521F0F30D000A7F91 /* ViewController.swift */,
@@ -173,30 +177,13 @@
 				2861203C21F0F30F000A7F91 /* LaunchScreen.storyboard */,
 				2861203F21F0F30F000A7F91 /* Info.plist */,
 				2861208F21F10D82000A7F91 /* GoogleService-Info.plist */,
-				2861206121F0F373000A7F91 /* MessageController.swift */,
-				2861206321F0F3B9000A7F91 /* ChatLogController.swift */,
-				2861206521F0F5FB000A7F91 /* NewMessageController.swift */,
-				2861206721F0F62D000A7F91 /* SettingsTableViewController.swift */,
-				2861206921F0F675000A7F91 /* User.swift */,
-				2861206B21F0F680000A7F91 /* Message.swift */,
-				2861206D21F0F6B4000A7F91 /* SettingsCell.swift */,
-				2861206F21F0F6F4000A7F91 /* UserCell.swift */,
-				2861207121F0F714000A7F91 /* ChatMessageCell.swift */,
 				2861207321F0F992000A7F91 /* Extension.swift */,
-				2861207521F0FB2E000A7F91 /* LoginViewController.swift */,
-				2861207921F0FE00000A7F91 /* LoginController.swift */,
-				2861207B21F0FE36000A7F91 /* LoginViewModel.swift */,
-				2861207D21F0FE73000A7F91 /* RegistrationViewModel.swift */,
-				2861207F21F0FEDE000A7F91 /* EnterInformationController.swift */,
 				2861208121F0FF7E000A7F91 /* CustomTextField.swift */,
 				2861208321F10096000A7F91 /* Bindable.swift */,
 				2861209921F114B3000A7F91 /* SettingsBetter.png */,
 				2861209721F114AC000A7F91 /* MessagesIconCrusht.png */,
 				2861209B21F17165000A7F91 /* upload_image_icon.png */,
 				2861208521F10236000A7F91 /* Logo.png */,
-				2861209121F112B4000A7F91 /* ProfilePageViewController.swift */,
-				2861209321F11328000A7F91 /* ProfileTopStackView.swift */,
-				2861209521F11371000A7F91 /* ProfPageMiddleView.swift */,
 			);
 			path = ChatApp;
 			sourceTree = "<group>";
@@ -217,6 +204,51 @@
 				2861205521F0F310000A7F91 /* Info.plist */,
 			);
 			path = ChatAppUITests;
+			sourceTree = "<group>";
+		};
+		2861209E21F188AF000A7F91 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2861209321F11328000A7F91 /* ProfileTopStackView.swift */,
+				2861209521F11371000A7F91 /* ProfPageMiddleView.swift */,
+				2861206D21F0F6B4000A7F91 /* SettingsCell.swift */,
+				2861206F21F0F6F4000A7F91 /* UserCell.swift */,
+				2861207121F0F714000A7F91 /* ChatMessageCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2861209F21F188BF000A7F91 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2861206921F0F675000A7F91 /* User.swift */,
+				2861206B21F0F680000A7F91 /* Message.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		286120A021F188C9000A7F91 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2861206321F0F3B9000A7F91 /* ChatLogController.swift */,
+				2861206121F0F373000A7F91 /* MessageController.swift */,
+				2861206721F0F62D000A7F91 /* SettingsTableViewController.swift */,
+				2861206521F0F5FB000A7F91 /* NewMessageController.swift */,
+				2861207521F0FB2E000A7F91 /* LoginViewController.swift */,
+				2861207921F0FE00000A7F91 /* LoginController.swift */,
+				2861207F21F0FEDE000A7F91 /* EnterInformationController.swift */,
+				2861209121F112B4000A7F91 /* ProfilePageViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		286120A121F18938000A7F91 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				2861207B21F0FE36000A7F91 /* LoginViewModel.swift */,
+				2861207D21F0FE73000A7F91 /* RegistrationViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		75DC1B997366F8FFE965688A /* Pods */ = {
