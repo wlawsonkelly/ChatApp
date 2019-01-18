@@ -38,7 +38,7 @@
 		2861209621F11371000A7F91 /* ProfPageMiddleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2861209521F11371000A7F91 /* ProfPageMiddleView.swift */; };
 		2861209821F114AC000A7F91 /* MessagesIconCrusht.png in Resources */ = {isa = PBXBuildFile; fileRef = 2861209721F114AC000A7F91 /* MessagesIconCrusht.png */; };
 		2861209A21F114B4000A7F91 /* SettingsBetter.png in Resources */ = {isa = PBXBuildFile; fileRef = 2861209921F114B3000A7F91 /* SettingsBetter.png */; };
-		2861209C21F17165000A7F91 /* upload_image_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2861209B21F17165000A7F91 /* upload_image_icon@2x.png */; };
+		2861209C21F17165000A7F91 /* upload_image_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2861209B21F17165000A7F91 /* upload_image_icon.png */; };
 		2C4842A76BE6AD3AFF73F72D /* Pods_ChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A70D3473CDCC10EF426FE6 /* Pods_ChatApp.framework */; };
 		427D82A47DF92892F37EFC2C /* Pods_ChatAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BFA3A03B47813CBED50409 /* Pods_ChatAppUITests.framework */; };
 		D2D5D39D064EB1EC02D1588A /* Pods_ChatAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3A7302177DE4B82DFF15FEB /* Pods_ChatAppTests.framework */; };
@@ -101,7 +101,7 @@
 		2861209521F11371000A7F91 /* ProfPageMiddleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfPageMiddleView.swift; sourceTree = "<group>"; };
 		2861209721F114AC000A7F91 /* MessagesIconCrusht.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MessagesIconCrusht.png; sourceTree = "<group>"; };
 		2861209921F114B3000A7F91 /* SettingsBetter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SettingsBetter.png; sourceTree = "<group>"; };
-		2861209B21F17165000A7F91 /* upload_image_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload_image_icon@2x.png"; sourceTree = "<group>"; };
+		2861209B21F17165000A7F91 /* upload_image_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upload_image_icon.png; sourceTree = "<group>"; };
 		441D549E758F20ADDB4DB7CD /* Pods-ChatApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp.release.xcconfig"; sourceTree = "<group>"; };
 		57076B620E11CA40B0BD844D /* Pods-ChatAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatAppTests/Pods-ChatAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		706F5466A76394BA9D854C09 /* Pods-ChatApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -190,7 +190,7 @@
 				2861208321F10096000A7F91 /* Bindable.swift */,
 				2861209921F114B3000A7F91 /* SettingsBetter.png */,
 				2861209721F114AC000A7F91 /* MessagesIconCrusht.png */,
-				2861209B21F17165000A7F91 /* upload_image_icon@2x.png */,
+				2861209B21F17165000A7F91 /* upload_image_icon.png */,
 				2861208521F10236000A7F91 /* Logo.png */,
 				2861209121F112B4000A7F91 /* ProfilePageViewController.swift */,
 				2861209321F11328000A7F91 /* ProfileTopStackView.swift */,
@@ -352,7 +352,7 @@
 				2861203E21F0F30F000A7F91 /* LaunchScreen.storyboard in Resources */,
 				2861203B21F0F30F000A7F91 /* Assets.xcassets in Resources */,
 				2861209821F114AC000A7F91 /* MessagesIconCrusht.png in Resources */,
-				2861209C21F17165000A7F91 /* upload_image_icon@2x.png in Resources */,
+				2861209C21F17165000A7F91 /* upload_image_icon.png in Resources */,
 				2861203921F0F30D000A7F91 /* Main.storyboard in Resources */,
 				2861209A21F114B4000A7F91 /* SettingsBetter.png in Resources */,
 				2861209021F10D82000A7F91 /* GoogleService-Info.plist in Resources */,
