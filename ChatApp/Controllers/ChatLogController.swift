@@ -614,7 +614,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
                         if document.exists {
                             Firestore.firestore().collection("messages").document(documentSnapshot.documentID).collection("user-messages").addDocument(data: values)
                             
-                            self.observeMoreMessages()
+                        
                             self.observeMessages()
                         }
                         else{

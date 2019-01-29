@@ -75,8 +75,12 @@ class MessageController: UITableViewController, SettingsControllerDelegate, Logi
         
         tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
         
- 
+        observeUserMessages()
         observeMessages()
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
    
     var messages = [Message]()
@@ -149,10 +153,10 @@ class MessageController: UITableViewController, SettingsControllerDelegate, Logi
                     return message1.timestamp?.int32Value > message2.timestamp?.int32Value
                 })
                 
-                DispatchQueue.main.async(execute: {
-                    self.tableView.reloadData()
-                    
-                })
+                self.timer?.invalidate()
+                print("we just canceled our timer")
+                
+                self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
                 
             })
             
