@@ -34,12 +34,12 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 class MessageController: UITableViewController, SettingsControllerDelegate, LoginControllerDelegate  {
  
     func didFinishLoggingIn() {
-        observeMessages()
+        //messages.removeAll()
+        fetchUserAndSetupNavBarTitle()
     }
     
     func didSaveSettings() {
-        print("Notified of dismissal")
-        observeMessages()
+     fetchUserAndSetupNavBarTitle()
     }
     
     @objc func handleSettings() {
@@ -52,7 +52,7 @@ class MessageController: UITableViewController, SettingsControllerDelegate, Logi
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("HomeController did appear")
+      
 
         if Auth.auth().currentUser == nil {
             let loginController = LoginViewController()
@@ -75,8 +75,7 @@ class MessageController: UITableViewController, SettingsControllerDelegate, Logi
         
         tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
         
-        observeUserMessages()
-        observeMessages()
+        fetchUserAndSetupNavBarTitle()
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -87,13 +86,15 @@ class MessageController: UITableViewController, SettingsControllerDelegate, Logi
     var messagesDictionary = [String: Message]()
     
     func observeUserMessages() {
-        self.fetchUserAndSetupNavBarTitle()
+        
         guard let uid = Auth.auth().currentUser?.uid else {return}
+        
         
         Firestore.firestore().collection("messages").whereField("toId", isEqualTo: uid).getDocuments(completion: { (snapshot, err) in
             if let err = err {
                 print("HELLLLLLLLNO", err)
             }
+            
             
             snapshot?.documents.forEach({ (documentSnapshot) in
                 let userDictionary = documentSnapshot.data()
@@ -113,13 +114,14 @@ class MessageController: UITableViewController, SettingsControllerDelegate, Logi
                 }
                 
                 self.timer?.invalidate()
-                print("we just canceled our timer")
+            
                 
                 self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
                 
             })
             
         })
+        
     }
     
     var timer: Timer?
@@ -127,36 +129,42 @@ class MessageController: UITableViewController, SettingsControllerDelegate, Logi
     @objc func handleReloadTable() {
 
         DispatchQueue.main.async(execute: {
-            print("we reloaded the table")
+           
             self.tableView.reloadData()
         })
     }
  
     
     func observeMessages() {
-        self.fetchUserAndSetupNavBarTitle()
+
         guard let uid = Auth.auth().currentUser?.uid else {return}
-        
         
         Firestore.firestore().collection("messages").whereField("fromId", isEqualTo: uid).getDocuments(completion: { (snapshot, err) in
             if let err = err {
                 print("FAILLLLLLLLL", err)
             }
             
-            
             snapshot?.documents.forEach({ (documentSnapshot) in
                 let userDictionary = documentSnapshot.data()
                 let message = Message(dictionary: userDictionary)
+                
                 self.messages.append(message)
                 
-                self.messages.sort(by: { (message1, message2) -> Bool in
-                    return message1.timestamp?.int32Value > message2.timestamp?.int32Value
+                let messageStuff = Message(dictionary: userDictionary)
+                
+                if let chatPartnerId = messageStuff.chatPartnerId() {
+                    self.messagesDictionary[chatPartnerId] = message
+                    self.messages = Array(self.messagesDictionary.values)
+                    self.messages.sort(by: { (message1, message2) -> Bool in
+                        return message1.timestamp?.int32Value > message2.timestamp?.int32Value
+                        //refactor to cut cost
+                    })
+                }
+                
+                DispatchQueue.main.async(execute: {
+                    
+                    self.tableView.reloadData()
                 })
-                
-                self.timer?.invalidate()
-                print("we just canceled our timer")
-                
-                self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
                 
             })
             
@@ -226,7 +234,12 @@ class MessageController: UITableViewController, SettingsControllerDelegate, Logi
     }
     
     func setupNavBarWithUser(_ user: User) {
+        messages.removeAll()
+        messagesDictionary.removeAll()
+        tableView.reloadData()
         
+        observeUserMessages()
+        observeMessages()
         
         let titleView = UIView()
         titleView.frame = CGRect(x: 0, y: 0, width: 100, height: 40)

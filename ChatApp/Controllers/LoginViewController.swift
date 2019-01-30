@@ -72,7 +72,7 @@ class LoginViewController: UIViewController {
     let registeringHUD = JGProgressHUD(style: .dark)
     
     @objc fileprivate func handleRegister() {
-        print("Register our User in Firebase Auth")
+        
         let messageController = MessageController()
         registrationViewModel.performRegistration { [weak self] (err) in
             if let err = err {
@@ -110,7 +110,7 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            print("Succesfully authenticated with Firebase.")
+            
             self.fetchFacebookUser()
         }
     }
@@ -133,7 +133,6 @@ class LoginViewController: UIViewController {
                     let photoData = pictureUrlFB!["data"] as? [String:Any]
                     let photoUrl = photoData!["url"] as? String
                     
-                    print(firstNameFB ?? "", lastNameFB ?? "", socialIdFB ?? "", genderFB ?? "", photoUrl ?? "")
                    
                     self.fullName = "\(firstNameFB ?? "") \(lastNameFB ?? "")"
                     self.photoUrl = photoUrl

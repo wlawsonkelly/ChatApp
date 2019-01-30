@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FacebookCore
+import FirebaseFirestore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

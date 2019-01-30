@@ -580,21 +580,18 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         
         self.inputTextField.text = nil
         
-        //let ref = Firestore.firestore().collection("messages")
         
-        
-      print("about to send new message")
         //SOLUTION TO CURRENT ISSUE
         //if statement whether this document exists or not and IF It does than user-message thing, if it doesn't then we create a document
         Firestore.firestore().collection("messages").whereField("fromId", isEqualTo: fromId).whereField("toId", isEqualTo: toId).getDocuments(completion: { (snapshot, err) in
-            print("HAHHAHAAHAHAAAHAAHAH")
+           
             if let err = err {
                 print("Error making individual convo", err)
                 return
             }
             
             if (snapshot?.isEmpty)! {
-                print("SENDING NEW MESSAGE")
+               
                 Firestore.firestore().collection("messages").addDocument(data: values) { (err) in
                     if let err = err {
                         print("error sending message", err)
@@ -602,7 +599,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
                     }
                     
                     Firestore.firestore().collection("messages").whereField("fromId", isEqualTo: fromId).whereField("toId", isEqualTo: toId).getDocuments(completion: { (snapshot, err) in
-                        print("TITITITITITITITIITITIT")
+                    
                         if let err = err {
                             print("Error making individual convo", err)
                             return

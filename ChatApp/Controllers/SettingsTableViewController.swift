@@ -110,7 +110,7 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
                 print(err)
                 return
             }
-            print(snapshot?.data() ?? "fuck you")
+            
             guard let dictionary = snapshot?.data() else {return}
             self.user = User(dictionary: dictionary)
             self.loadUserPhotos()
@@ -276,7 +276,7 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
 //    }
     
     @objc fileprivate func handleNameChange(textField: UITextField) {
-        print("name changing")
+        
         self.user?.name = textField.text
     }
     
@@ -329,7 +329,7 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
                 return
             }
             self.dismiss(animated: true, completion: {
-                print("Dismissal Complete")
+                
                 self.delegate?.didSaveSettings()
                 
             })
