@@ -578,6 +578,11 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         
         properties.forEach({values[$0] = $1})
         
+        //flip to id and from id to fix message controller query glitch
+        var otherValues:  [String: AnyObject] = ["toId": fromId as AnyObject, "fromId": toId as AnyObject, "timestamp": timestamp as AnyObject]
+        
+        properties.forEach({otherValues[$0] = $1})
+        
         self.inputTextField.text = nil
         
         
@@ -629,6 +634,28 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
                 let document = documentSnapshot
                 if document.exists {
                     Firestore.firestore().collection("messages").document(documentSnapshot.documentID).collection("user-messages").addDocument(data: values)
+                    
+                    Firestore.firestore().collection("messages").document(documentSnapshot.documentID).updateData(values)
+                    
+                    //flip it
+                    
+                    Firestore.firestore().collection("messages").whereField("fromId", isEqualTo: toId).whereField("toId", isEqualTo: fromId).getDocuments(completion: { (snapshot, err) in
+                        print("TITITITITITITITIITITIT")
+                        if let err = err {
+                            print("Error making individual convo", err)
+                            return
+                        }
+                        
+                        snapshot?.documents.forEach({ (documentSnapshot) in
+                            
+                            let document = documentSnapshot
+                            if document.exists {
+                                Firestore.firestore().collection("messages").document(documentSnapshot.documentID).updateData(otherValues)
+                                
+                                
+                            }
+                        })
+                    })
                 }
               
                 })
